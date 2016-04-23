@@ -3,3 +3,9 @@
 *.idb
 *.obj
 *.log
+*.pdb
+*.suo
+*.exe
+*.sdf
+*.ilk
+*.opensdf
