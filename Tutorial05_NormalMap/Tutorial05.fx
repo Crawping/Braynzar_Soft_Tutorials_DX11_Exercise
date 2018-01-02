@@ -164,7 +164,7 @@ float4 NORMALMAP_PS(NORMALMAP_VS_OUTPUT input) : SV_Target
 	input.tangent = normalize(input.tangent - dot(input.tangent, input.normal)*input.normal);
 
 	//Create the biTangent
-	float3 biTangent = cross(input.normal, input.tangent);
+	float3 biTangent = cross(input.tangent,input.normal);
 	//float3 biTangent = input.biTangent;
 	//Create the "Texture Space"
 	float3x3 TBN = float3x3(input.tangent, biTangent, input.normal);

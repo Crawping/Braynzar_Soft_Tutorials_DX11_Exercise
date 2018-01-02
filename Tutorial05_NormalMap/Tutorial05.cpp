@@ -409,105 +409,105 @@ HRESULT InitDevice()
 		return hr;
 
 	//// Create vertex buffer
-	//SimpleVertex cubeVertices[] =
-	//{
-	//	////Top
-	//	//{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f) ,XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f) ,XMFLOAT2(1.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 1.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(-1.0f, 1.0f, 1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	////Bottom
-	//	//{ XMFLOAT3(-1.0f, -1.0f, -1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(1.0f, -1.0f, -1.0f),   XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(1.0f, 0.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(-1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	////Left
-	//	//{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
-	//	//{ XMFLOAT3(-1.0f, -1.0f, -1.0f),  XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(0.0f, 0.0f, -1.0f) },
-	//	//{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
-	//	//{ XMFLOAT3(-1.0f, 1.0f, 1.0f),   XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
-	//	////Right
-	//	//{ XMFLOAT3(1.0f, -1.0f, 1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) ,XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	//	//{ XMFLOAT3(1.0f, -1.0f, -1.0f),   XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	//	//{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	//	//{ XMFLOAT3(1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	//	////Front
-	//	//{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(1.0f, -1.0f, -1.0f),  XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(1.0f, 1.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(-1.0f, 1.0f, -1.0f),   XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(0.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	////Back
-	//	//{ XMFLOAT3(-1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(1.0f, -1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//{ XMFLOAT3(-1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	
-	//	//Front
-	//	{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(0.0f, 1.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(-1.0f, 1.0f, -1.0f),   XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(1.0f, 0.0f) ,XMFLOAT3(1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(1.0f, -1.0f, -1.0f),  XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
-	//	//Back
-	//	{ XMFLOAT3(-1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(1.0f, -1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(-1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//Top
-	//	{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f) ,XMFLOAT2(0.0f, 0.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(-1.0f, 1.0f, 1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 1.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f) ,XMFLOAT2(1.0f, 0.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
-	//	//Bottom
-	//	{ XMFLOAT3(-1.0f, -1.0f, -1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(1.0f, -1.0f, -1.0f),   XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	{ XMFLOAT3(-1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(1.0f, 0.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-	//	//Left
-	//	{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
-	//	{ XMFLOAT3(-1.0f, 1.0f, 1.0f),   XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
-	//	{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
-	//	{ XMFLOAT3(-1.0f, -1.0f, -1.0f),  XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(0.0f, 0.0f, -1.0f) },
-	//	//Right
-	//	{ XMFLOAT3(1.0f, -1.0f, -1.0f),   XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	//	{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	//	{ XMFLOAT3(1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	//	{ XMFLOAT3(1.0f, -1.0f, 1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) ,XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	//	
-	//};
+	SimpleVertex cubeVertices0[] =
+	{
+		////Top
+		//{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f) ,XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f) ,XMFLOAT2(1.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 1.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(-1.0f, 1.0f, 1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		////Bottom
+		//{ XMFLOAT3(-1.0f, -1.0f, -1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(1.0f, -1.0f, -1.0f),   XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(1.0f, 0.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(-1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		////Left
+		//{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		//{ XMFLOAT3(-1.0f, -1.0f, -1.0f),  XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		//{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		//{ XMFLOAT3(-1.0f, 1.0f, 1.0f),   XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		////Right
+		//{ XMFLOAT3(1.0f, -1.0f, 1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) ,XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		//{ XMFLOAT3(1.0f, -1.0f, -1.0f),   XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		//{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		//{ XMFLOAT3(1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		////Front
+		//{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(1.0f, -1.0f, -1.0f),  XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(1.0f, 1.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(-1.0f, 1.0f, -1.0f),   XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(0.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		////Back
+		//{ XMFLOAT3(-1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(1.0f, -1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//{ XMFLOAT3(-1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		
+		//Front
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(0.0f, 1.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),   XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(1.0f, 0.0f) ,XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f),  XMFLOAT3(0.0f, 0.0f, -1.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		//Back
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 0.0f, 1.0f),XMFLOAT2(0.0f, 1.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		//Top
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f) ,XMFLOAT2(0.0f, 0.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f),   XMFLOAT3(0.0f, 1.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(0.0f, 1.0f, 0.0f) ,XMFLOAT2(1.0f, 0.0f),XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		//Bottom
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f),   XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(0.0f, 0.0f),XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f),  XMFLOAT3(0.0f, -1.0f, 0.0f),XMFLOAT2(1.0f, 0.0f) ,XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		//Left
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f),   XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f),  XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f),  XMFLOAT3(-1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		//Right
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f),   XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 0.0f),XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(1.0f, 1.0f),XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 1.0f) ,XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f),  XMFLOAT3(1.0f, 0.0f, 0.0f),XMFLOAT2(0.0f, 0.0f) ,XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		
+	};
 
-	//WORD indices[] =
-	//{
-	//	/*	3,1,0,
-	//		2,1,3,
+	WORD indices0[] =
+	{
+		/*	3,1,0,
+			2,1,3,
 
-	//		6,4,5,
-	//		7,4,6,
+			6,4,5,
+			7,4,6,
 
-	//		11,9,8,
-	//		10,9,11,
+			11,9,8,
+			10,9,11,
 
-	//		14,12,13,
-	//		15,12,14,
+			14,12,13,
+			15,12,14,
 
-	//		19,17,16,
-	//		18,17,19,
+			19,17,16,
+			18,17,19,
 
-	//		22,20,21,
-	//		23,20,22*/
+			22,20,21,
+			23,20,22*/
 
-	//	0,1,2,0,2,3,
-	//	4,5,6,4,6,7,
-	//	8,9,10,8,10,11,
-	//	12,13,14,12,14,15,
-	//	16,17,18,16,18,19,
-	//	20,21,22,20,22,23
-	//};
+		0,1,2,0,2,3,
+		4,5,6,4,6,7,
+		8,9,10,8,10,11,
+		12,13,14,12,14,15,
+		16,17,18,16,18,19,
+		20,21,22,20,22,23
+	};
 
-	std::string meshPath("Disc.x");
-	SimpleVertex* cubeVertices = NULL;
-	int vertNum, triNum;
-	WORD* indices = NULL;
-	int indicesNum;
+	std::string meshPath("Box.fbx");
+	SimpleVertex* cubeVertices = cubeVertices0;
+	int vertNum(24), triNum;
+	WORD* indices = indices0;
+	int indicesNum = 36;
 	LoadMesh(meshPath, &cubeVertices, &vertNum, &indices, &indicesNum, &triNum);
 	g_IndicesNum = indicesNum;
 	D3D11_BUFFER_DESC bd;
@@ -563,7 +563,7 @@ HRESULT InitDevice()
 	g_CubeWorld1 = XMMatrixIdentity();
 	g_CubeWorld2 = XMMatrixIdentity();
 	//Camera
-	g_CamPosition = XMVectorSet(0.0f, 2.0f, -5.0f, 0.0f);
+	g_CamPosition = XMVectorSet(0.0f, 0.0f, -5.0f, 0.0f);
 	g_CamTarget = XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
 	g_CamUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 	//Set the View matrix
@@ -675,8 +675,11 @@ void Render()
 	g_pImmediateContext->ClearDepthStencilView(g_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 	XMMATRIX mScale = XMMatrixScaling(0.05f, 0.05f, 0.05f);
+	mScale = XMMatrixIdentity();
 	// 1st Cube: Rotate around the origin
-	g_CubeWorld1 = mScale*XMMatrixRotationY(g_CurrentTime)*XMMatrixRotationZ(g_CurrentTime*0.5f);
+	//g_CubeWorld1 = mScale*XMMatrixRotationZ(3.1415926f*0.5f);
+	g_CubeWorld1 = mScale*XMMatrixRotationRollPitchYaw(g_CurrentTime*0.5f, 0,g_CurrentTime);
+
 	//g_CubeWorld1 = XMMatrixRotationY(0);
 	//
 	// Update variables for the first cube
@@ -872,6 +875,16 @@ void DetectInput(double time)
 	{
 		g_MoveUpDown += speed;
 	}
+	if (keyboardState[DIK_R] & 0x80)
+	{
+		g_MoveUpDown = 0;
+		g_MoveLeftRight = 0;
+		g_MoveBackForward = 0;
+		g_MoveBackForward = 0;
+		g_CamYaw = 0;
+		g_CamPitch = 0;
+	}
+
 	if ((mouseCurrState.lX != g_MouseLastState.lX) || (mouseCurrState.lY != g_MouseLastState.lY))
 	{
 		g_CamYaw += g_MouseLastState.lX * 0.001f;
@@ -1177,6 +1190,7 @@ HRESULT ComputeTangents(SimpleVertex vertices[], int verticesCount, WORD indices
 	return hr;
 }
 
+
 bool LoadMesh(std::string& pFile,SimpleVertex** vertexes,int* verticesNum,WORD** indices,int* indicesNum,int* traingalNum)
 {
 	Assimp::Importer importer;
@@ -1185,6 +1199,7 @@ bool LoadMesh(std::string& pFile,SimpleVertex** vertexes,int* verticesNum,WORD**
 	// propably to request more postprocessing than we do in this example.
 	const aiScene* scene = importer.ReadFile(pFile,
 		aiProcess_CalcTangentSpace |
+		//aiProcess_MakeLeftHanded|
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType);
@@ -1199,6 +1214,7 @@ bool LoadMesh(std::string& pFile,SimpleVertex** vertexes,int* verticesNum,WORD**
 			(*vertexes)[i].Normal = XMFLOAT3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
 			(*vertexes)[i].Tangent = XMFLOAT3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z);
 			(*vertexes)[i].UV = XMFLOAT2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y);
+			int  j;
 		}
 
 		int sumIdices = 0;
@@ -1227,3 +1243,5 @@ bool LoadMesh(std::string& pFile,SimpleVertex** vertexes,int* verticesNum,WORD**
 	}
 	return true;
 }
+
+
