@@ -678,7 +678,7 @@ void Render()
 	mScale = XMMatrixIdentity();
 	// 1st Cube: Rotate around the origin
 	//g_CubeWorld1 = mScale*XMMatrixRotationZ(3.1415926f*0.5f);
-	g_CubeWorld1 = mScale*XMMatrixRotationRollPitchYaw(g_CurrentTime*0.5f, 0,g_CurrentTime);
+	g_CubeWorld1 = mScale*XMMatrixRotationRollPitchYaw(0, 0, g_CurrentTime);
 
 	//g_CubeWorld1 = XMMatrixRotationY(0);
 	//
