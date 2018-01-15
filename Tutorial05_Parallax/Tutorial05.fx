@@ -69,6 +69,7 @@ NORMALMAP_VS_OUTPUT NORMALMAP_VS(NORMALMAP_VS_INPUT input)
 	float3 vTangentWS = mul(input.tangent, (float3x3) World);
 	float3 vBiTangentWS = cross(input.normal, input.tangent);
 	vBiTangentWS = mul(vBiTangentWS, (float3x3)World);
+    Out.vNormalWS = vNormalWS;
 	vNormalWS = normalize(vNormalWS);
 	vTangentWS = normalize(vTangentWS);
 	vBiTangentWS = normalize(vBiTangentWS);
@@ -76,8 +77,8 @@ NORMALMAP_VS_OUTPUT NORMALMAP_VS(NORMALMAP_VS_INPUT input)
 	// Propagate the view and the light vectors (in tangent space):
     Out.vLightTS = mul(TBN,light.dir);
 	Out.position = mul(float4(input.Pos, 1.0f), WVP);
-	Out.texCoord = input.texCoord;
-
+    Out.texCoord = input.texCoord * BaseTextureRepeat;
+ 
 
 	// Compute position in world space:
     float4 vPositionWS = mul(float4(input.Pos, 1.0f), World);
@@ -150,7 +151,6 @@ float4 NORMALMAP_PS(NORMALMAP_VS_OUTPUT i) : SV_Target
 
          // Sample height map which in this case is stored in the alpha channel of the normal map:
         fCurrHeight = ObjNormMap.SampleGrad(ObjSamplerState, vTexCurrentOffset, dx, dy).a;
-        //fCurrHeight = ObjNormMap.Sample(ObjSamplerState, vTexCurrentOffset).a;
         fCurrentBound -= fStepSize;
 
         if (fCurrHeight > fCurrentBound)
