@@ -569,7 +569,7 @@ void Render()
 	//
 	g_pImmediateContext->ClearDepthStencilView(g_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-	XMMATRIX mScale = XMMatrixScaling(0.5f, 0.5f, 0.5f);
+	XMMATRIX mScale = XMMatrixScaling(0.05f, 0.05f, 0.05f);
 	mScale = XMMatrixIdentity();
 	// 1st Cube: Rotate around the origin
 	//g_CubeWorld1 = mScale*XMMatrixRotationZ(3.1415926f*0.5f);

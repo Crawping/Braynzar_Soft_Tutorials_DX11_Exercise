@@ -79,7 +79,6 @@ NORMALMAP_VS_OUTPUT NORMALMAP_VS(NORMALMAP_VS_INPUT input)
 	Out.position = mul(float4(input.Pos, 1.0f), WVP);
     Out.texCoord = input.texCoord * BaseTextureRepeat;
  
-
 	// Compute position in world space:
     float4 vPositionWS = mul(float4(input.Pos, 1.0f), World);
 
@@ -87,26 +86,22 @@ NORMALMAP_VS_OUTPUT NORMALMAP_VS(NORMALMAP_VS_INPUT input)
     float3 vViewWS = EyePosition - vPositionWS;
     Out.vViewWS = vViewWS;
     Out.vViewTS = mul(TBN,vViewWS);
-   // Out.vViewTS = float3(Out.vViewTS.x, -Out.vViewTS.y, Out.vViewTS.z);
 	// Compute the ray direction for intersecting the height field profile with 
 	// current view ray. See the above paper for derivation of this computation.
-
-	// Compute initial parallax displacement direction:
+    // Compute initial parallax displacement direction:
     float2 vParallaxDirection = normalize(Out.vViewTS.xy);
 
-	// The length of this vector determines the furthest amount of displacement:
-    float fLength = length(Out.vViewTS);
-    float fParallaxLength = sqrt(fLength * fLength - Out.vViewTS.z * Out.vViewTS.z) / Out.vViewTS.z;
-	// Compute the actual reverse parallax displacement vector:
-    Out.vParallaxOffsetTS = vParallaxDirection * fParallaxLength;
 
-	// Need to scale the amount of displacement to account for different height ranges
-	// in height maps. This is controlled by an artist-editable parameter:
-    Out.vParallaxOffsetTS *= HeightMapScale;
+    float fParallaxLimit = -length(Out.vViewTS.xy) / Out.vViewTS.z;
+    fParallaxLimit *= HeightMapScale;
+    Out.vParallaxOffsetTS = vParallaxDirection * fParallaxLimit;
+
+
 
 	return Out;
 }
 
+//https://www.gamedev.net/articles/programming/graphics/a-closer-look-at-parallax-occlusion-mapping-r3262/
 float4 NORMALMAP_PS(NORMALMAP_VS_OUTPUT i) : SV_Target
 {
     float3 vLightTS = normalize(i.vLightTS);
@@ -126,79 +121,52 @@ float4 NORMALMAP_PS(NORMALMAP_VS_OUTPUT i) : SV_Target
    // Start the current sample located at the input texture coordinate, which would correspond
    // to computing a bump mapping result:
     float2 texSample = i.texCoord;
-    int nNumSteps = (int) lerp(50, 8, dot(vViewWS, vNormalWS));
+    int nNumSteps = (int) lerp(50, 8, dot(vViewTS, float3(0, 0, 1)));
+
     float fCurrHeight = 0.0;
     float fStepSize = 1.0 / (float) nNumSteps;
     float fPrevHeight = 1.0;
     float fNextHeight = 0.0;
-
     int nStepIndex = 0;
     bool bCondition = true;
-
-    float2 vTexOffsetPerStep = fStepSize * i.vParallaxOffsetTS;
-    float2 vTexCurrentOffset = i.texCoord;
     float fCurrentBound = 1.0;
-    float fParallaxAmount = 0.0;
+    float2 vCurrOffset = float2(0, 0);
+    float2 vLastOffset = float2(0, 0);
 
-    float2 pt1 = 0;
-    float2 pt2 = 0;
-       
-    float2 texOffset2 = 0;
-   // sampler2D sampler2d = ObjSamplerState;
     while (nStepIndex < nNumSteps)
     {
-        vTexCurrentOffset -= vTexOffsetPerStep;
-
          // Sample height map which in this case is stored in the alpha channel of the normal map:
-        fCurrHeight = ObjNormMap.SampleGrad(ObjSamplerState, vTexCurrentOffset, dx, dy).a;
-        fCurrentBound -= fStepSize;
+        fCurrHeight = ObjNormMap.SampleGrad(ObjSamplerState, i.texCoord + vCurrOffset, dx, dy).a;
 
         if (fCurrHeight > fCurrentBound)
         {
-            pt1 = float2(fCurrentBound, fCurrHeight);
-            pt2 = float2(fCurrentBound + fStepSize, fPrevHeight);
-
-            texOffset2 = vTexCurrentOffset - vTexOffsetPerStep;
-
+      
+            float delta1 = fCurrHeight - fCurrentBound;
+            float delta2 = (fCurrentBound + fStepSize) - fPrevHeight;
+            float ratio = delta1 / (delta1 + delta2);
+            vCurrOffset = (ratio) * vLastOffset + (1.0 - ratio) * vCurrOffset;
             nStepIndex = nNumSteps + 1;
-            fPrevHeight = fCurrHeight;
+          
         }
         else
         {
+            fCurrentBound -= fStepSize;
+
             nStepIndex++;
             fPrevHeight = fCurrHeight;
+            vLastOffset = vCurrOffset;
+            vCurrOffset += fStepSize * i.vParallaxOffsetTS;
         }
     }
 
-    float fDelta2 = pt2.x - pt2.y;
-    float fDelta1 = pt1.x - pt1.y;
-      
-    float fDenominator = fDelta2 - fDelta1;
-      
-      // SM 3.0 requires a check for divide by zero, since that operation will generate
-      // an 'Inf' number instead of 0, as previous models (conveniently) did:
-    if (fDenominator == 0.0f)
-    {
-        fParallaxAmount = 0.0f;
-    }
-    else
-    {
-        fParallaxAmount = (pt1.x * fDelta2 - pt2.x * fDelta1) / fDenominator;
-    }
-      
-    float2 vParallaxOffset = i.vParallaxOffsetTS * (1 - fParallaxAmount);
-
-      // The computed texture offset for the displaced point on the pseudo-extruded surface:
-    float2 texSampleBase = i.texCoord - vParallaxOffset;
-    texSample = texSampleBase;
+    // The computed texture offset for the displaced point on the pseudo-extruded surface:
+    texSample = i.texCoord + vCurrOffset;
 
 	// Sample the normal from the normal map for the given texture sample:
     float3 vNormalTS = normalize(ObjNormMap.Sample(ObjSamplerState, texSample) * 2 - 1);
     float4 diffuse = ObjTexture.Sample(ObjSamplerState, texSample);
 	float3 finalColor;
 	finalColor = saturate(dot(vNormalTS, vLightTS)*light.diffuse  * diffuse);
-   // finalColor = ObjNormMap.Sample(ObjSamplerState, texSample).aaaa;
-   // finalColor = vViewTS;
 	return float4(finalColor, diffuse.a);
 }
 
